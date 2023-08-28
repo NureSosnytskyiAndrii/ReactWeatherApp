@@ -30,6 +30,11 @@
     margin-left: 15px;
 }
 
+.daily-item .date {
+    margin: 5px;
+    color: darkorange;
+}
+
 .description {
     cursor: inherit;
     flex: 1 1;

@@ -14,6 +14,16 @@ const Forecast = ({ data }) => {
     const dayInAWeek = new Date().getDay();
     const forecastDays = WEEK_DAYS.slice(dayInAWeek, WEEK_DAYS.length).concat(WEEK_DAYS.slice(0, dayInAWeek));
 
+    // Add an array of date strings in digital format (DD/MM)
+    const currentDate = new Date();
+    const forecastDates = forecastDays.map((day, idx) => {
+        const date = new Date(currentDate);
+        date.setDate(date.getDate() + idx);
+        const dayOfMonth = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        return `${dayOfMonth}/${month}`;
+    });
+
     return (
         <>
             <label className="title">Daily weather forecast</label>
@@ -23,8 +33,9 @@ const Forecast = ({ data }) => {
                         <AccordionItemHeading>
                             <AccordionItemButton>
                                 <div className="daily-item">
-                                    <img src={`icons/${item.weather[0].icon}.png`} className="icon-small" alt="weather" />
+                                    <img src={`ReactWeatherApp/icons/${item.weather[0].icon}.png`} className="icon-small" alt="weather" />
                                     <label className="day">{forecastDays[idx]}</label>
+                                    <label className="date">{forecastDates[idx]}</label>
                                     <label className="description">{item.weather[0].description}</label>
                                     <label className="min-max">{Math.round(item.main.temp_max)}°C /{Math.round(item.main.temp_min)}°C</label>
                                 </div>
