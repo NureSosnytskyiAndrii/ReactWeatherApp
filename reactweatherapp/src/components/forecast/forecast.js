@@ -18,7 +18,7 @@ const Forecast = ({ data }) => {
     const currentDate = new Date();
     const forecastDates = forecastDays.map((day, idx) => {
         const date = new Date(currentDate);
-        date.setDate(date.getDate() + idx);
+        date.setDate(date.getDate() + idx + 1); // Shift by 1 day ahead
         const dayOfMonth = date.getDate().toString().padStart(2, '0');
         const month = (date.getMonth() + 1).toString().padStart(2, '0');
         return `${dayOfMonth}/${month}`;
@@ -33,7 +33,7 @@ const Forecast = ({ data }) => {
                         <AccordionItemHeading>
                             <AccordionItemButton>
                                 <div className="daily-item">
-                                    <img src={`icons/${item.weather[0].icon}.png`} className="icon-small" alt="weather" />
+                                    <img src={`ReactWeatherApp/icons/${item.weather[0].icon}.png`} className="icon-small" alt="weather" />
                                     <label className="day">{forecastDays[idx]}</label>
                                     <label className="date">{forecastDates[idx]}</label>
                                     <label className="description">{item.weather[0].description}</label>
